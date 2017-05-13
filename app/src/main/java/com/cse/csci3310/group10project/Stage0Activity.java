@@ -30,7 +30,7 @@ public class Stage0Activity extends AppCompatActivity {
 
     Button btnFound;
     int currentStage = 0;
-    Intent intent;
+    Intent caller;
     ImageView map,poi;
     boolean[] nearBeacon;
     Spinner beaconCheater;
@@ -39,11 +39,11 @@ public class Stage0Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage0);
-        intent = getIntent();
-        if(intent!=null)
+        caller = getIntent();
+        if(caller!=null)
         {
-            int from =  intent.getIntExtra(getString(R.string.key_fromStage),0);
-            currentStage = intent.getIntExtra(getString(R.string.key_currentStage),0);
+            int from =  caller.getIntExtra(getString(R.string.key_fromStage),0);
+            currentStage = caller.getIntExtra(getString(R.string.key_currentStage),0);
             if(from>currentStage) currentStage = from;
         }
 
@@ -153,6 +153,7 @@ public class Stage0Activity extends AppCompatActivity {
         intent = new Intent(Stage0Activity.this,stageClasses[n]);
         intent.putExtra(getString(R.string.key_fromStage),0);
         intent.putExtra(getString(R.string.key_currentStage),currentStage);
+        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
