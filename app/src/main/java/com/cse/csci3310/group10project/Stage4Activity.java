@@ -56,8 +56,9 @@ public class Stage4Activity extends AppCompatActivity {
         //Initialize item
         items = new RelativeLayout[10];
         itemCounters = new TextView[10];
-        thePlayer.item[0] = 3;         //HP potion
-        thePlayer.item[1] = 2;          //grenade
+        thePlayer.item[Item.POTION] = 3;         //HP potion
+        thePlayer.item[Item.GRENADE] = 2;          //grenade
+        thePlayer.item[Item.POISON] = 1;
 
         RelativeLayout itemb = (RelativeLayout) findViewById(R.id.itemb);
       //  TextView itembCounter = (TextView) findViewById(R.id.itembCounter);
@@ -164,6 +165,7 @@ public class Stage4Activity extends AppCompatActivity {
             }
         });
 
+        //Attack order decision
         Fighter first,last;
         if(thePlayer.spd>theBoss.spd)
         {
@@ -189,6 +191,8 @@ public class Stage4Activity extends AppCompatActivity {
                 last = theBoss;
             }
         }
+
+        //Player action execution
         if(playerAct == Action.ATK)
         {
             if(state==State.INIT)
@@ -204,14 +208,14 @@ public class Stage4Activity extends AppCompatActivity {
             {
                 switch(thePlayer.usingItem)
                 {
-                    case 0: //hp potion
+                    case Item.POTION: //hp potion
                         writeMsg("You use a HP potion.");
                         battleWait(1000);
                         writeMsg("You regenerate 20 HP");
                         thePlayer.heal(20);
                         battleWait(1000);
                         break;
-                    case 1: //grenade
+                    case Item.GRENADE: //grenade
                         writeMsg("You use a grenade.");
                         battleWait(1000);
                         int dmg = 20;
@@ -219,12 +223,48 @@ public class Stage4Activity extends AppCompatActivity {
                         theBoss.damage(dmg);
                         battleWait(1000);
                         break;
+                    case Item.POISON:
+                        writeMsg("You use poison.");
+                        battleWait(1000);
+                        writeMsg(theBoss.name + " get poisoned");
+                        theBoss.debuf = 1;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView bossDebufText = (TextView) findViewById(R.id.bossDebuff);
+                                bossDebufText.setVisibility(View.VISIBLE);
+                            }
+                        });
+                        battleWait(1000);
+                        break;
                 }
                 thePlayer.usingItem = -1;
+
             }
             if(state==State.INIT && last == theBoss)
                 attack(last,first);
 
+        }
+
+        //Debuff execution
+        if(state==State.INIT && theBoss.debuf==1)        //poisoned
+        {
+            writeMsg(theBoss.name + " affected by poison.");
+            battleWait(1000);
+            int dmg = 10;
+            writeMsg(theBoss.name + " gets "+dmg+" points of damage.");
+            theBoss.damage(dmg);
+            battleWait(1000);
+        }
+
+        //Battle result check
+        if(state == State.WIN)
+        {
+            writeMsg(theBoss.name + " is fainted.");
+        }
+        else if(state == State.LOSE)
+        {
+            writeMsg("You are fainted.");
         }
 
         runOnUiThread(new Runnable() {
@@ -267,20 +307,6 @@ public class Stage4Activity extends AppCompatActivity {
         writeMsg(to.name + " get"+s2+" "+dmg+" points of damage.");
         to.damage(10);
         battleWait(1000);
-
-        if(state==State.INIT && to.hp==0)
-        {
-            if(to==theBoss)
-            {
-                writeMsg(to.name + " is fainted.");
-                state = State.WIN;
-            }
-            else
-            {
-                writeMsg("You are fainted.");
-                state = State.LOSE;
-            }
-        }
     }
 
     private void writeMsg(String str)
@@ -312,6 +338,12 @@ public class Stage4Activity extends AppCompatActivity {
                 messageBar.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    private static class Item
+    {
+        static final int POTION = 0, GRENADE = 1, POISON = 2;
+
     }
 
     @Override
@@ -364,6 +396,7 @@ public class Stage4Activity extends AppCompatActivity {
             def = d;
             spd = s;
             hp = 100;
+            debuf = 0;
             hpbar = (RelativeLayout) findViewById(R.id.playerHPbar);
             hpbarbg = (RelativeLayout) findViewById(R.id.playerHPbarbg);
             hpbarShape = (GradientDrawable)hpbar.getBackground();
@@ -382,6 +415,12 @@ public class Stage4Activity extends AppCompatActivity {
             updateHPbar();
         }
 
+        @Override
+        protected void die()
+        {
+            state = State.LOSE;
+        }
+
     }
 
     private class Boss extends Fighter
@@ -393,6 +432,7 @@ public class Stage4Activity extends AppCompatActivity {
             def = d;
             spd = s;
             hp = 100;
+            debuf = 0;
             hpbar = (RelativeLayout) findViewById(R.id.bossHPbar);
             hpbarbg = (RelativeLayout) findViewById(R.id.bossHPbarbg);
             hpbarShape = (GradientDrawable)hpbar.getBackground();
@@ -405,11 +445,18 @@ public class Stage4Activity extends AppCompatActivity {
 
         }
 
+        @Override
+        protected void die()
+        {
+            state = State.WIN;
+        }
+
     }
 
     private class Fighter
     {
-        int hp,atk,def,spd;
+
+        int hp,atk,def,spd,debuf;
         RelativeLayout hpbar;
         RelativeLayout hpbarbg;
         GradientDrawable hpbarShape;
@@ -453,9 +500,10 @@ public class Stage4Activity extends AppCompatActivity {
 
         }
 
-        private void die()
-        {
 
+        protected void die()
+        {
+            return;
         }
     }
 

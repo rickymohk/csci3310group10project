@@ -15,4 +15,7 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+    <string name="title_activity_itemstore">itemstore</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

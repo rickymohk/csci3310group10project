@@ -230,7 +230,7 @@ public class Stage0Activity extends AppCompatActivity {
         Class[] stageClasses = new Class[6];
         stageClasses[0] = Stage0Activity.class;
         stageClasses[1] = Stage1Activity.class;
-        stageClasses[2] = Stage2Activity.class;
+        stageClasses[2] = itemstore.class;
         stageClasses[3] = Stage3Activity.class;
         stageClasses[4] = Stage4Activity.class;
         intent = new Intent(Stage0Activity.this,stageClasses[n]);
