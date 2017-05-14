@@ -1,0 +1,307 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cse.csci3310.group10project.item_store2">
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="EquipmentStore"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="231dp"
+        android:text="Player's equipment"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:layout_above="@+id/textView4"
+        android:id="@+id/tableLayout7">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/sword0ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/sword" />
+
+            <ImageView
+                android:id="@+id/sword1ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/sword1" />
+
+            <ImageView
+                android:id="@+id/sword2ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/sword2" />
+
+            <ImageView
+                android:id="@+id/helmet0ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/helmet" />
+
+            <ImageView
+                android:id="@+id/helmet1ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/helmet1" />
+
+            <ImageView
+                android:id="@+id/helmet2ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/helmet2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="ATK: 2 $50" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="ATK: 10 $100" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="ATK: 15 $200" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="HP: 10 $50" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="HP: 30 $100" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="HP: 50 $200" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/armor0ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/armor" />
+
+            <ImageView
+                android:id="@+id/armor1ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/armor1" />
+
+            <ImageView
+                android:id="@+id/armor2ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/armor2" />
+
+            <ImageView
+                android:id="@+id/boots0ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/boots" />
+
+            <ImageView
+                android:id="@+id/boots1ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/boots1" />
+
+            <ImageView
+                android:id="@+id/boots2ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/boots2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="DFS: 2 $50" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="DFS: 5 $100" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="DFS: 8 $200" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="SPD: 1 $50" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="SPD: 2 $100" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="50dp"
+                android:layout_height="59dp"
+                android:text="SPD : 3 $200" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tableLayout7"
+        android:layout_marginTop="19dp"
+        android:id="@+id/tableLayout8">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:id="@+id/WeaponImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/weapon" />
+
+            <ImageView
+                android:id="@+id/HelmetImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/helmetslot" />
+
+            <ImageView
+                android:id="@+id/ArmorImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/armorslot" />
+
+            <ImageView
+                android:id="@+id/BootsImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/bootsslot" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/HP"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="HP:" />
+
+            <TextView
+                android:id="@+id/ATK"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="ATK:" />
+
+            <TextView
+                android:id="@+id/DFS"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="DFS:" />
+
+            <TextView
+                android:id="@+id/SPD"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="SPD:" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/MoneyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout7"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_toRightOf="@+id/textView4"
+        android:text="Money:"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/resetbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="78dp"
+        android:text="Reset" />
+
+</RelativeLayout>
