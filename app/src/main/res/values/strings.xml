@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Group10project</string>
+    <string name="preference_file_key">com.cse.csci3310.group10project.preferenceFileKey</string>
     <string name="key_currentStage">com.cse.csci3310.group10project.currentStage</string>
     <string name="key_fromStage">com.cse.csci3310.group10project.fromStage</string>
-    <string name="key_cash">com.cse.csci3310.group10project.cash</string>
+    <string name="key_cash">MONEY</string>
     <string name="item_counter">x%d</string>
     <string name="cash_counter">$%d</string>
     <string name="stage_1_start">Catch coins in 1 minutes.</string>
     <string name="stage_1_end">You have $%d.\nGo to the shop at SHB904\n to buy some items.</string>
+
 
     <string-array name="beacons_array">
         <item>none</item>

@@ -37,7 +37,7 @@ public class item_store1 extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.item_store1, container, false);
         //Storage sections
-        settings = this.getActivity().getSharedPreferences("PLAYERITEM", 0);
+        settings = this.getActivity().getSharedPreferences(getString(R.string.preference_file_key), 0);
         editor = settings.edit();
         //
         LoadData();
@@ -55,7 +55,7 @@ public class item_store1 extends Fragment {
 
         if (isVisibleToUser && hadBeenInvisible && settings != null){
 
-            settings = this.getActivity().getSharedPreferences("PLAYERITEM", 0);
+            settings = this.getActivity().getSharedPreferences(getString(R.string.preference_file_key), 0);
             editor = settings.edit();
 
             money = settings.getInt("MONEY", 0);

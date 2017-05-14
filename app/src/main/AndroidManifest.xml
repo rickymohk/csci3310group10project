@@ -23,17 +23,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".Stage1Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".Stage2Activity" android:screenOrientation="portrait"/>
         <activity android:name=".Stage3Activity" android:screenOrientation="portrait"/>
         <activity android:name=".Stage4Activity" android:screenOrientation="portrait"/>
         <activity android:name=".EndActivity" android:screenOrientation="portrait"/>
         <activity android:name=".Stage0Activity" android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".itemstore"
+            android:label="@string/title_activity_itemstore"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
     </application>
 
 </manifest>

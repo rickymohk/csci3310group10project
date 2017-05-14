@@ -2,6 +2,7 @@ package com.cse.csci3310.group10project;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class itemstore extends AppCompatActivity {
+    SharedPreferences.Editor editor;
+    SharedPreferences settings;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,6 +41,9 @@ public class itemstore extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itemstore);
+
+        settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
+        editor = settings.edit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,8 +71,9 @@ public class itemstore extends AppCompatActivity {
     private void stageBack()
     {
         Intent intent = new Intent(itemstore.this,Stage0Activity.class);
-        intent.putExtra(getString(R.string.key_fromStage),1);
-        intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
+        editor.putInt(getString(R.string.key_fromStage),2);
+        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
+        editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

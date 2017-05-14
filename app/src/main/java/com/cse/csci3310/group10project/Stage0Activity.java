@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.RemoteException;
@@ -44,6 +45,9 @@ import java.util.List;
 
 public class Stage0Activity extends AppCompatActivity {
 
+    SharedPreferences.Editor editor;
+    SharedPreferences settings;
+
     Button btnFound;
     int currentStage = 0;
     Intent caller;
@@ -65,14 +69,16 @@ public class Stage0Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage0);
 
-        caller = getIntent();
-        if(caller!=null)
+        settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
+        editor = settings.edit();
 
-        {
-            int from =  caller.getIntExtra(getString(R.string.key_fromStage),0);
-            currentStage = caller.getIntExtra(getString(R.string.key_currentStage),0);
-            if(from>currentStage) currentStage = from;
-        }
+        caller = getIntent();
+        int from =  settings.getInt(getString(R.string.key_fromStage),0);
+        currentStage = settings.getInt(getString(R.string.key_currentStage),0);
+        if(from>currentStage) currentStage = from;
+
+
+
 
         nearBeacon = new boolean[] {false,false,false,false};
 
@@ -225,6 +231,7 @@ public class Stage0Activity extends AppCompatActivity {
 
     private void goToStage(int n)
     {
+
         Log.d("Stage transit","Current stage:" + currentStage);
         Intent intent;
         Class[] stageClasses = new Class[6];
@@ -234,9 +241,9 @@ public class Stage0Activity extends AppCompatActivity {
         stageClasses[3] = Stage3Activity.class;
         stageClasses[4] = Stage4Activity.class;
         intent = new Intent(Stage0Activity.this,stageClasses[n]);
-        intent.putExtra(getString(R.string.key_fromStage),0);
-        intent.putExtra(getString(R.string.key_currentStage),currentStage);
-        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
+        editor.putInt(getString(R.string.key_fromStage),0);
+        editor.putInt(getString(R.string.key_currentStage),currentStage);
+        editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

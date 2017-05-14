@@ -1,6 +1,8 @@
 package com.cse.csci3310.group10project;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Stage1Activity extends AppCompatActivity {
+    SharedPreferences.Editor editor;
+    SharedPreferences settings;
     Intent caller;
     RelativeLayout bucket,main,dropDummy;
     float mainHeight,mainWidth;
@@ -39,10 +43,12 @@ public class Stage1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage1);
         caller = getIntent();
+        settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
+        editor = settings.edit();
 
         pause = true;
         countDown = 60;
-        cash = caller.getIntExtra(getString(R.string.key_cash),0);
+        cash = settings.getInt("MONEY",0);
         droppings = new ArrayList<Dropping>();
         dropsToBeAdd = new ArrayList<Dropping>();
 
@@ -314,9 +320,10 @@ public class Stage1Activity extends AppCompatActivity {
     private void stageBack()
     {
         Intent intent = new Intent(Stage1Activity.this,Stage0Activity.class);
-        intent.putExtra(getString(R.string.key_fromStage),1);
-        intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
-        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
+        editor.putInt(getString(R.string.key_fromStage),1);
+        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
+        editor.putInt("MONEY",settings.getInt("MONEY",0));
+        editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -325,9 +332,10 @@ public class Stage1Activity extends AppCompatActivity {
     private void stageClear()
     {
         Intent intent = new Intent(Stage1Activity.this,Stage0Activity.class);
-        intent.putExtra(getString(R.string.key_fromStage),1);
-        intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
-        intent.putExtra(getString(R.string.key_cash),cash);
+        editor.putInt(getString(R.string.key_fromStage),1);
+        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
+        editor.putInt("MONEY",cash);
+        editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

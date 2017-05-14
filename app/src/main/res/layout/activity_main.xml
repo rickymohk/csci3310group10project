@@ -10,10 +10,18 @@
         app:srcCompat="@drawable/stage_intro_dummy" />
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/btnLoad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Game"
+        android:layout_above="@+id/btnNew"
+        android:layout_centerHorizontal="true"
+        android:text="Load Game" />
+
+    <Button
+        android:id="@+id/btnNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="New Game" />
 </RelativeLayout>

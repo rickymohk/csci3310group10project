@@ -3,28 +3,21 @@ package com.cse.csci3310.group10project;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.Scene;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewDebug;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnStart;
+    SharedPreferences.Editor editor;
+    SharedPreferences settings;
+    Button btnNew,btnLoad;
     Intent intent;
     protected static final String TAG = "BeaconsEverywhere";
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
@@ -50,13 +43,33 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
+        editor = settings.edit();
+        boolean savedGame = settings.getBoolean("SAVEDGAME",false);
 
-        btnStart = (Button) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(new View.OnClickListener() {
+
+        btnLoad = (Button) findViewById(R.id.btnLoad);
+        btnLoad.setEnabled(savedGame);
+        btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this,Stage0Activity.class);
                 intent.putExtra("stage",-1);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnNew = (Button) findViewById(R.id.btnNew);
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.clear();
+                editor.apply();
+                editor.putBoolean("SAVEDGAME",true);
+                editor.apply();
+                intent = new Intent(MainActivity.this,Stage0Activity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

@@ -41,7 +41,7 @@ public class item_store2 extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.item_store2, container, false);
         //Storage sections
-        settings = this.getActivity().getSharedPreferences("PLAYERITEM", 0);
+        settings = this.getActivity().getSharedPreferences(getString(R.string.preference_file_key), 0);
         editor = settings.edit();
         //
 
@@ -82,7 +82,7 @@ public class item_store2 extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
 
         if (isVisibleToUser){
-            settings = this.getActivity().getSharedPreferences("PLAYERITEM", 0);
+            settings = this.getActivity().getSharedPreferences(getString(R.string.preference_file_key), 0);
             editor = settings.edit();
 
             money = settings.getInt("MONEY", 0);
@@ -115,7 +115,7 @@ public class item_store2 extends Fragment {
         money = settings.getInt("MONEY", -1);
         //preset the money amount , for TESTING ONLY, this line should be deleted
         if(money == -1){money = 100;}
-        money = 100;
+        //money = 100;
         stat[0] = settings.getInt("HP", 0);
         stat[1] = settings.getInt("ATK", 0);
         stat[2] = settings.getInt("DFS", 0);

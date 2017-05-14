@@ -1,6 +1,7 @@
 package com.cse.csci3310.group10project;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.ActionBar;
@@ -22,6 +23,8 @@ import org.w3c.dom.Text;
 public class Stage4Activity extends AppCompatActivity {
 
     private enum State {INIT,WIN,LOSE};
+    SharedPreferences.Editor editor;
+    SharedPreferences settings;
     Button btnAtk,btnItm,btnEsc;
     LinearLayout actionBar,gameoverDialog,itemBarLL;
     TextView messageBar, textGameover;
@@ -39,6 +42,8 @@ public class Stage4Activity extends AppCompatActivity {
         setContentView(R.layout.activity_stage4);
         caller = getIntent();
 
+        settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
+        editor = settings.edit();
 
         actionBar = (LinearLayout) findViewById(R.id.actionBar);
         itemBar = (HorizontalScrollView) findViewById(R.id.itemBar);
@@ -355,9 +360,9 @@ public class Stage4Activity extends AppCompatActivity {
     private void stageBack()
     {
         Intent intent = new Intent(Stage4Activity.this,Stage0Activity.class);
-        intent.putExtra(getString(R.string.key_fromStage),4);
-        intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
-        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
+        editor.putInt(getString(R.string.key_fromStage),4);
+        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
+        editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -374,9 +379,9 @@ public class Stage4Activity extends AppCompatActivity {
         {
             intent = new Intent(Stage4Activity.this,MainActivity.class);
         }
-        intent.putExtra(getString(R.string.key_fromStage),4);
-        intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
-        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
+        editor.putInt(getString(R.string.key_fromStage),4);
+        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
+        editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
