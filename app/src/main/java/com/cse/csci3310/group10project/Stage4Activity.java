@@ -325,6 +325,7 @@ public class Stage4Activity extends AppCompatActivity {
         Intent intent = new Intent(Stage4Activity.this,Stage0Activity.class);
         intent.putExtra(getString(R.string.key_fromStage),4);
         intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
+        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -343,6 +344,7 @@ public class Stage4Activity extends AppCompatActivity {
         }
         intent.putExtra(getString(R.string.key_fromStage),4);
         intent.putExtra(getString(R.string.key_currentStage),caller.getIntExtra(getString(R.string.key_currentStage),0));
+        intent.putExtra(getString(R.string.key_cash),caller.getIntExtra(getString(R.string.key_cash),0));
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
