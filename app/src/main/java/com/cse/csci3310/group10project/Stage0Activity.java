@@ -64,15 +64,10 @@ public class Stage0Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage0);
-<<<<<<< HEAD
-        intent = getIntent();
 
-
-        if(intent!=null)
-=======
         caller = getIntent();
         if(caller!=null)
->>>>>>> origin/master
+
         {
             int from =  caller.getIntExtra(getString(R.string.key_fromStage),0);
             currentStage = caller.getIntExtra(getString(R.string.key_currentStage),0);
