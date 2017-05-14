@@ -1,9 +1,13 @@
 package com.cse.csci3310.group10project;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.RemoteException;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,9 +25,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconConsumer;
+import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.Identifier;
+import org.altbeacon.beacon.MonitorNotifier;
+import org.altbeacon.beacon.RangeNotifier;
+import org.altbeacon.beacon.Region;
+import org.altbeacon.beacon.startup.BootstrapNotifier;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Stage0Activity extends AppCompatActivity {
@@ -35,11 +51,22 @@ public class Stage0Activity extends AppCompatActivity {
     boolean[] nearBeacon;
     Spinner beaconCheater;
 
+    MyReceiver myReceiver;
+
+    String uuid1, distance1;
+    String uuid2, distance2;
+    String uuid3, distance3;
+    int rssi1, rssi2, rssi3;
+
+    protected static final String TAG = "BeaconsEverywhere";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage0);
         intent = getIntent();
+
+
         if(intent!=null)
         {
             int from =  intent.getIntExtra(getString(R.string.key_fromStage),0);
@@ -119,9 +146,64 @@ public class Stage0Activity extends AppCompatActivity {
             }
         });
 
+        displayBeaconInfo();
+        myReceiver = new MyReceiver();
+        IntentFilter intentfilter = new IntentFilter();
+        intentfilter.addAction(MyService.beacon);
+        registerReceiver(myReceiver, intentfilter);
+        startService();
 
+    }
 
+    public void startService() {
+        startService(new Intent(getBaseContext(), MyService.class));
+    }
 
+    public void stopService() {
+        stopService(new Intent(getBaseContext(), MyService.class));
+    }
+
+    private class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            uuid1 = intent.getStringExtra("uuid1");
+            distance1 = intent.getStringExtra("distance1");
+            rssi1 = intent.getIntExtra("rssi1", 0);
+            uuid2 = intent.getStringExtra("uuid2");
+            distance2 = intent.getStringExtra("distance2");
+            rssi2 = intent.getIntExtra("rssi2", 0);
+            uuid3 = intent.getStringExtra("uuid3");
+            distance3 = intent.getStringExtra("distance3");
+            rssi3 = intent.getIntExtra("rssi3", 0);
+        }
+    }
+
+    public void displayBeaconInfo() {
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView textBeacon1 = (TextView) findViewById(R.id.beacon1);
+                                TextView textBeacon2 = (TextView) findViewById(R.id.beacon2);
+                                TextView textBeacon3 = (TextView) findViewById(R.id.beacon3);
+                                textBeacon1.setText("58 - UUID: " + uuid1 + ", Distance: " + distance1 + ", RSSI: " + rssi1);
+                                textBeacon2.setText("CC - UUID: " + uuid2 + ", Distance: " + distance2 + ", RSSI: " + rssi2);
+                                textBeacon3.setText("iPad(E8) - UUID: " + uuid3 + ", Distance: " + distance3 + ", RSSI: " + rssi3);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t.start();
     }
 
     @Override
@@ -134,6 +216,7 @@ public class Stage0Activity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        stopService();
                         Toast.makeText(Stage0Activity.this, "Bye!", Toast.LENGTH_SHORT).show();
                         finish();
                     }})
