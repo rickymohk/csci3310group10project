@@ -1,0 +1,18 @@
+equipment
+1: sword 	atk+2
+2: sword1	atk+10
+3: sword2	atk+15
+4: helmet 	hp+10
+5: helmet1	hp+30
+6: helmet2	hp+50
+7: armor 	dfs+2
+8: armor1	dfs+5
+9: armor2	dfs+8
+10: boots 	spd+1
+11: boots1	spd+2
+12: boots2	spd+3
+
+item
+1: potion +50hp
+2: grenade -30hp
+3: poison -10hp/round

@@ -31,6 +31,53 @@
         android:text="POISONED" />
 
     <LinearLayout
+        android:id="@+id/startDialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#33000000"
+        android:elevation="1dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="0"
+                android:background="@drawable/boss_dummy">
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0"
+                android:text="Ha ha ha... Can you defeat me?"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="--Tap to continue--"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/gameoverDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,9 +155,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView"
             android:textSize="20sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <HorizontalScrollView
             android:id="@+id/itemBar"
@@ -154,7 +200,7 @@
             android:layout_alignBottom="@+id/itemBar"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btnAtk"
@@ -179,5 +225,38 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/playerHPbarbg"
+        android:layout_toEndOf="@+id/playerIcon">
+
+
+        <ImageView
+            android:id="@+id/eq0ImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/weapon" />
+
+        <ImageView
+            android:id="@+id/eq1ImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/helmetslot" />
+
+        <ImageView
+            android:id="@+id/eq2ImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/armorslot" />
+
+        <ImageView
+            android:id="@+id/eq3ImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/bootsslot" />
+
+    </TableRow>
 
 </RelativeLayout>

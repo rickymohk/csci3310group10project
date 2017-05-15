@@ -42,7 +42,7 @@
                 android:id="@+id/sword0ImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/sword" />
+                app:srcCompat="@drawable/sword0" />
 
             <ImageView
                 android:id="@+id/sword1ImageView"
@@ -60,7 +60,7 @@
                 android:id="@+id/helmet0ImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/helmet" />
+                app:srcCompat="@drawable/helmet0" />
 
             <ImageView
                 android:id="@+id/helmet1ImageView"
@@ -126,7 +126,7 @@
                 android:id="@+id/armor0ImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/armor" />
+                app:srcCompat="@drawable/armor0" />
 
             <ImageView
                 android:id="@+id/armor1ImageView"
@@ -144,7 +144,7 @@
                 android:id="@+id/boots0ImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/boots" />
+                app:srcCompat="@drawable/boots0" />
 
             <ImageView
                 android:id="@+id/boots1ImageView"

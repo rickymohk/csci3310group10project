@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class Stage4Activity extends AppCompatActivity {
     State state = State.INIT;
     String msg;
     Intent caller;
+    int[] slotMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,19 +54,39 @@ public class Stage4Activity extends AppCompatActivity {
         messageBar = (TextView) findViewById(R.id.messageBar);
         gameoverDialog = (LinearLayout) findViewById(R.id.gameoverDialog);
         textGameover = (TextView) findViewById(R.id.textGameover);
+        LinearLayout startDialog = (LinearLayout) findViewById(R.id.startDialog);
         btnAtk = (Button) findViewById(R.id.btnAtk);
         btnItm = (Button) findViewById(R.id.btnItm);
         btnEsc = (Button) findViewById(R.id.btnEsc);
 
-        theBoss = new Boss(10,0,10);
-        thePlayer = new Player(10,0,10);
+        theBoss = new Boss(200,20,0,1);
+        //Equipment
+        thePlayer = new Player(100+settings.getInt("HP",0),10+settings.getInt("ATK",0),0+settings.getInt("DFS",0),settings.getInt("SPD",0));
+        for(int i=0;i<4;i++)
+        {
+            int slotID = settings.getInt("ESLOT"+i,0);
+            if(slotID>0)
+            {
+                String[] eqName = new String[]{"sword","helmet","armor","boots"};
+                ImageView imgv = (ImageView) findViewById(getResources().getIdentifier("eq"+i+"ImageView","id",getPackageName()));
+                imgv.setImageResource(getResources().getIdentifier(eqName[(slotID-1)/3]+(slotID-1)%3,"drawable",getPackageName()));
+            }
+        }
 
         //Initialize item
         items = new RelativeLayout[10];
         itemCounters = new TextView[10];
-        thePlayer.item[Item.POTION] = 3;         //HP potion
-        thePlayer.item[Item.GRENADE] = 2;          //grenade
-        thePlayer.item[Item.POISON] = 1;
+        slotMap = new int[10];
+        for(int i=0;i<3;i++)
+        {
+            int slotQuan = settings.getInt("SLOT"+i+"NO", 0);
+            int slotID = settings.getInt("SLOT"+i, 0);
+            if(slotID>0)
+            {
+                thePlayer.item[slotID-1] = slotQuan;
+                slotMap[slotID-1] = i;
+            }
+        }
 
         RelativeLayout itemb = (RelativeLayout) findViewById(R.id.itemb);
       //  TextView itembCounter = (TextView) findViewById(R.id.itembCounter);
@@ -82,6 +105,7 @@ public class Stage4Activity extends AppCompatActivity {
                 ViewGroup.LayoutParams rlp = itemb.getLayoutParams();
                 item.setLayoutParams(rlp);
                 item.setBackgroundResource(getResources().getIdentifier("item_"+i,"drawable",getPackageName()));
+                Log.d("debug","item_"+i);
                 items[i] = item;
                 itemBarLL.addView(item,rlp);
                 TextView counter = new TextView(this);
@@ -118,7 +142,7 @@ public class Stage4Activity extends AppCompatActivity {
 
             }
         }
-        switchBar(Bar.ACT);
+        switchBar(Bar.MSG);
         itemb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +150,29 @@ public class Stage4Activity extends AppCompatActivity {
             }
         });
 
+        startDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setVisibility(View.GONE);
+                Thread startThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        writeMsg(thePlayer.name + " VS " + theBoss.name +".");
+                        battleWait(1000);
+                        writeMsg("Battle Start!");
+                        battleWait(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switchBar(Bar.ACT);
+                            }
+                        });
+
+                    }
+                });
+                startThread.start();
+            }
+        });
         gameoverDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,14 +263,14 @@ public class Stage4Activity extends AppCompatActivity {
                     case Item.POTION: //hp potion
                         writeMsg("You use a HP potion.");
                         battleWait(1000);
-                        writeMsg("You regenerate 20 HP");
-                        thePlayer.heal(20);
+                        writeMsg("You regenerate 50 HP");
+                        thePlayer.heal(50);
                         battleWait(1000);
                         break;
                     case Item.GRENADE: //grenade
                         writeMsg("You use a grenade.");
                         battleWait(1000);
-                        int dmg = 20;
+                        int dmg = 30;
                         writeMsg(theBoss.name + " gets "+dmg+" points of damage.");
                         theBoss.damage(dmg);
                         battleWait(1000);
@@ -243,6 +290,10 @@ public class Stage4Activity extends AppCompatActivity {
                         battleWait(1000);
                         break;
                 }
+                editor.putInt("SLOT"+slotMap[thePlayer.usingItem]+"NO",thePlayer.item[thePlayer.usingItem]);
+                if(thePlayer.item[thePlayer.usingItem]==0)
+                    editor.putInt("SLOT"+slotMap[thePlayer.usingItem],0);
+                editor.commit();
                 thePlayer.usingItem = -1;
 
             }
@@ -307,7 +358,7 @@ public class Stage4Activity extends AppCompatActivity {
         writeMsg(from.name + " attack"+s1+ " "+to.name +".");
         battleWait(1000);
         double margin = 0.5;
-        int dmg = (int)Math.round((from.atk * ((1+margin)-(2*margin)*Math.random()) - to.def));
+        int dmg = (int)Math.round((from.atk-to.def)*(1-0.15*Math.random()));
         if(dmg<1) dmg=1;
         writeMsg(to.name + " get"+s2+" "+dmg+" points of damage.");
         to.damage(10);
@@ -392,7 +443,7 @@ public class Stage4Activity extends AppCompatActivity {
         int[] item;
         int usingItem;
 
-        Player(int a, int d, int s)
+        Player(int h, int a, int d, int s)
         {
             item = new int[10];
             usingItem = -1;
@@ -400,7 +451,7 @@ public class Stage4Activity extends AppCompatActivity {
             atk = a;
             def = d;
             spd = s;
-            hp = 100;
+            hp = maxHp = h;
             debuf = 0;
             hpbar = (RelativeLayout) findViewById(R.id.playerHPbar);
             hpbarbg = (RelativeLayout) findViewById(R.id.playerHPbarbg);
@@ -416,7 +467,7 @@ public class Stage4Activity extends AppCompatActivity {
         void heal(int n)
         {
             hp += n;
-            if(hp>100) hp = 100;
+            if(hp>maxHp) hp = maxHp;
             updateHPbar();
         }
 
@@ -430,13 +481,13 @@ public class Stage4Activity extends AppCompatActivity {
 
     private class Boss extends Fighter
     {
-        Boss(int a, int d, int s)
+        Boss(int h, int a, int d, int s)
         {
             name = "Boss";
             atk = a;
             def = d;
             spd = s;
-            hp = 100;
+            hp = maxHp = h;
             debuf = 0;
             hpbar = (RelativeLayout) findViewById(R.id.bossHPbar);
             hpbarbg = (RelativeLayout) findViewById(R.id.bossHPbarbg);
@@ -461,7 +512,7 @@ public class Stage4Activity extends AppCompatActivity {
     private class Fighter
     {
 
-        int hp,atk,def,spd,debuf;
+        int maxHp,hp,atk,def,spd,debuf;
         RelativeLayout hpbar;
         RelativeLayout hpbarbg;
         GradientDrawable hpbarShape;
@@ -486,13 +537,13 @@ public class Stage4Activity extends AppCompatActivity {
                     int width = hpbarbg.getWidth();
                     //Log.d("debug","width="+width);
                     ViewGroup.LayoutParams lp = hpbar.getLayoutParams();
-                    lp.width = width * hp/100;
+                    lp.width = width * hp/maxHp;
                     hpbar.setLayoutParams(lp);
-                    if(hp<=20)
+                    if(hp<=maxHp*0.2)
                     {
                         hpbarShape.setColor(Color.RED);
                     }
-                    else if(hp<=50)
+                    else if(hp<=maxHp*0.5)
                     {
                         hpbarShape.setColor(Color.YELLOW);
                     }

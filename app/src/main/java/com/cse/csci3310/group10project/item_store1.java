@@ -77,8 +77,8 @@ public class item_store1 extends Fragment {
         slotQuan[2] = settings.getInt("SLOT2NO", 0);
 
         slotID[0] = settings.getInt("SLOT0", 0);
-        slotID[1] = settings.getInt("SLOT1", 1);
-        slotID[2] = settings.getInt("SLOT2", 2);
+        slotID[1] = settings.getInt("SLOT1", 0);
+        slotID[2] = settings.getInt("SLOT2", 0);
 
     }
 

@@ -94,16 +94,16 @@ public class item_store2 extends Fragment {
         equipArr = new int[12];
         for(int i = 0; i < 12; i++){
             switch(i+1){
-                case 1: equipArr[i] = R.drawable.sword;break;
+                case 1: equipArr[i] = R.drawable.sword0;break;
                 case 2: equipArr[i] = R.drawable.sword1;break;
                 case 3: equipArr[i] = R.drawable.sword2;break;
-                case 4: equipArr[i] = R.drawable.helmet;break;
+                case 4: equipArr[i] = R.drawable.helmet0;break;
                 case 5: equipArr[i] = R.drawable.helmet1;break;
                 case 6: equipArr[i] = R.drawable.helmet2;break;
-                case 7: equipArr[i] = R.drawable.armor;break;
+                case 7: equipArr[i] = R.drawable.armor0;break;
                 case 8: equipArr[i] = R.drawable.armor1;break;
                 case 9: equipArr[i] = R.drawable.armor2;break;
-                case 10: equipArr[i] = R.drawable.boots;break;
+                case 10: equipArr[i] = R.drawable.boots0;break;
                 case 11: equipArr[i] = R.drawable.boots1;break;
                 case 12: equipArr[i] = R.drawable.boots2;break;
                 default: equipArr[i] = R.drawable.empty;break;
@@ -162,7 +162,7 @@ public class item_store2 extends Fragment {
             int para = 0;
             switch (slotID[i]) {
                 case 1:
-                    para = R.drawable.sword;
+                    para = R.drawable.sword0;
                     break;
                 case 2:
                     para = R.drawable.sword1;
@@ -171,7 +171,7 @@ public class item_store2 extends Fragment {
                     para = R.drawable.sword2;
                     break;
                 case 4:
-                    para = R.drawable.helmet;
+                    para = R.drawable.helmet0;
                     break;
                 case 5:
                     para = R.drawable.helmet1;
@@ -180,7 +180,7 @@ public class item_store2 extends Fragment {
                     para = R.drawable.helmet2;
                     break;
                 case 7:
-                    para = R.drawable.armor;
+                    para = R.drawable.armor0;
                     break;
                 case 8:
                     para = R.drawable.armor1;
@@ -189,7 +189,7 @@ public class item_store2 extends Fragment {
                     para = R.drawable.armor2;
                     break;
                 case 10:
-                    para = R.drawable.boots;
+                    para = R.drawable.boots0;
                     break;
                 case 11:
                     para = R.drawable.boots1;
