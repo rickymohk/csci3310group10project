@@ -17,6 +17,7 @@ import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 public class MyService extends Service implements BeaconConsumer {
@@ -56,10 +57,17 @@ public class MyService extends Service implements BeaconConsumer {
         public void run() {
             try {
                 while (!isInterrupted()) {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
 
                     Intent beaconIntent = new Intent();
                     beaconIntent.setAction(beacon);
+
+                    Calendar c = Calendar.getInstance();
+                    int seconds = c.get(Calendar.SECOND);
+                    int minutes = c.get(Calendar.MINUTE);
+                    beaconIntent.putExtra("seconds", seconds);
+                    beaconIntent.putExtra("minutes", minutes);
+
                     beaconIntent.putExtra("uuid1", uuid1);
                     beaconIntent.putExtra("distance1", distance1);
                     beaconIntent.putExtra("rssi1", rssi1);
@@ -168,8 +176,9 @@ public class MyService extends Service implements BeaconConsumer {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "Stop beacon search.", Toast.LENGTH_LONG).show();
         beaconManager.unbind(this);
+        Toast.makeText(this, "Stop beacon search.", Toast.LENGTH_LONG).show();
+        stopSelf();
     }
 
 }

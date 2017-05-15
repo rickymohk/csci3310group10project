@@ -23,16 +23,73 @@
                 android:visibility="gone" />
 
             <ImageView
+                android:id="@+id/imgPOI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:srcCompat="@drawable/mappoi" />
+
+            <ImageView
                 android:id="@+id/imgMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/shb_09" />
 
             <ImageView
-                android:id="@+id/imgPOI"
+                android:id="@+id/nearPoint1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/mappoi" />
+                android:visibility="invisible"
+                app:srcCompat="@drawable/nearPoint1" />
+
+            <ImageView
+                android:id="@+id/nearPoint2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/nearPoint2" />
+
+            <ImageView
+                android:id="@+id/nearPoint3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/nearPoint3" />
+
+            <ImageView
+                android:id="@+id/nearPoint4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/nearPoint4" />
+
+            <ImageView
+                android:id="@+id/point1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/point1" />
+
+            <ImageView
+                android:id="@+id/point2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/point2" />
+
+            <ImageView
+                android:id="@+id/point3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/point3" />
+
+            <ImageView
+                android:id="@+id/point4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/point4" />
 
             <Spinner
                 android:id="@+id/beaconCheater"
@@ -41,6 +98,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/btnFound"
                 android:spinnerMode="dialog" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/beacon1"
+                android:layout_toEndOf="@+id/btnFound"
+                android:text="Time" />
 
             <TextView
                 android:id="@+id/beacon1"
