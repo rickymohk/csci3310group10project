@@ -29,12 +29,13 @@ public class MyService extends Service implements BeaconConsumer {
     String uuid1, distance1;
     String uuid2, distance2;
     String uuid3, distance3;
-    int rssi1, rssi2, rssi3;
+    String uuid4, distance4;
+    int rssi1, rssi2, rssi3, rssi4;
 
     final org.altbeacon.beacon.Region region1 = new org.altbeacon.beacon.Region("myBeacon", Identifier.parse("B5B182C7-EAB1-4988-AA99-B5C1517008D9"), null, null);
     final org.altbeacon.beacon.Region region2 = new org.altbeacon.beacon.Region("myBeacon2", Identifier.parse("B5B182C7-EAB1-4988-AA99-B5C1517008D8"), null, null);
     final org.altbeacon.beacon.Region region3 = new org.altbeacon.beacon.Region("myBeacon3", Identifier.parse("DA2BFB06-7CF3-5B40-BE96-8F1EC8891CE8"), null, null);
-
+    final org.altbeacon.beacon.Region region4 = new org.altbeacon.beacon.Region("myBeacon3", Identifier.parse("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"), null, null);
 
     @Override
     public void onCreate() {
@@ -79,6 +80,11 @@ public class MyService extends Service implements BeaconConsumer {
                     beaconIntent.putExtra("uuid3", uuid3);
                     beaconIntent.putExtra("distance3", distance3);
                     beaconIntent.putExtra("rssi3", rssi3);
+
+                    beaconIntent.putExtra("uuid4", uuid4);
+                    beaconIntent.putExtra("distance4", distance4);
+                    beaconIntent.putExtra("rssi4", rssi4);
+
                     sendBroadcast(beaconIntent);
 
 
@@ -92,8 +98,6 @@ public class MyService extends Service implements BeaconConsumer {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        //       throw new UnsupportedOperationException("Not yet implemented");
         return null;
     }
 
@@ -154,10 +158,15 @@ public class MyService extends Service implements BeaconConsumer {
                         distance2 = String.valueOf(oneBeacon.getDistance());
                         rssi2 = oneBeacon.getRssi();
                     }
-                    else {
+                    else if(oneBeacon.getId1().toString().equals("da2bfb06-7cf3-5b40-be96-8f1ec8891ce8")){
                         uuid3 = oneBeacon.getId1().toString();
                         distance3 = String.valueOf(oneBeacon.getDistance());
                         rssi3 = oneBeacon.getRssi();
+                    }
+                    else {
+                        uuid4 = oneBeacon.getId1().toString();
+                        distance4 = String.valueOf(oneBeacon.getDistance());
+                        rssi4 = oneBeacon.getRssi();
                     }
 
                 }
@@ -167,6 +176,7 @@ public class MyService extends Service implements BeaconConsumer {
             beaconManager.startMonitoringBeaconsInRegion(region1);
             beaconManager.startMonitoringBeaconsInRegion(region2);
             beaconManager.startMonitoringBeaconsInRegion(region3);
+            beaconManager.startMonitoringBeaconsInRegion(region4);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
