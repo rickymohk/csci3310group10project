@@ -72,7 +72,6 @@ public class itemstore extends AppCompatActivity {
     {
         Intent intent = new Intent(itemstore.this,Stage0Activity.class);
         editor.putInt(getString(R.string.key_fromStage),2);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

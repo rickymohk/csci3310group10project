@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,10 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 editor.putBoolean("SAVEDGAME",true);
                 editor.apply();
-                intent = new Intent(MainActivity.this,Stage0Activity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+                btnLoad.setVisibility(View.GONE);
+                TextView textView10 = (TextView) findViewById(R.id.textView10);
+                textView10.setText("To prepare yourself for fighting with the boss,\n you can first go to SHB924 to collect some money.");
+                btnNew.setText("Start");
+                btnNew.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent(MainActivity.this,Stage0Activity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
             }
         });
 

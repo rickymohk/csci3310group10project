@@ -412,7 +412,6 @@ public class Stage4Activity extends AppCompatActivity {
     {
         Intent intent = new Intent(Stage4Activity.this,Stage0Activity.class);
         editor.putInt(getString(R.string.key_fromStage),4);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -422,16 +421,9 @@ public class Stage4Activity extends AppCompatActivity {
     private void stageClear()
     {
         Intent intent;
-        if(state==State.WIN)
-        {
-            intent = new Intent(Stage4Activity.this,EndActivity.class);
-        }
-        else
-        {
-            intent = new Intent(Stage4Activity.this,MainActivity.class);
-        }
+        intent = new Intent(Stage4Activity.this,EndActivity.class);
+        editor.putBoolean("WIN",state==State.WIN);
         editor.putInt(getString(R.string.key_fromStage),4);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

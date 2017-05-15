@@ -321,7 +321,6 @@ public class Stage1Activity extends AppCompatActivity {
     {
         Intent intent = new Intent(Stage1Activity.this,Stage0Activity.class);
         editor.putInt(getString(R.string.key_fromStage),1);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.putInt("MONEY",settings.getInt("MONEY",0));
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -333,7 +332,6 @@ public class Stage1Activity extends AppCompatActivity {
     {
         Intent intent = new Intent(Stage1Activity.this,Stage0Activity.class);
         editor.putInt(getString(R.string.key_fromStage),1);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.putInt("MONEY",cash);
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

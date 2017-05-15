@@ -39,7 +39,6 @@ public class Stage3Activity extends AppCompatActivity {
     {
         Intent intent = new Intent(Stage3Activity.this,Stage0Activity.class);
         editor.putInt(getString(R.string.key_fromStage),3);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -50,7 +49,6 @@ public class Stage3Activity extends AppCompatActivity {
     {
         Intent intent = new Intent(Stage3Activity.this,Stage0Activity.class);
         editor.putInt(getString(R.string.key_fromStage),3);
-        editor.putInt(getString(R.string.key_currentStage),settings.getInt(getString(R.string.key_currentStage),0));
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
