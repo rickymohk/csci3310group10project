@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class itemstore extends AppCompatActivity {
     SharedPreferences.Editor editor;
@@ -58,6 +59,30 @@ public class itemstore extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        Button btnExit = (Button) findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(settings.getBoolean("firstVisitStore",true))
+                {
+                    LinearLayout exitDialog = (LinearLayout) findViewById(R.id.exitDialog);
+                    exitDialog.setVisibility(View.VISIBLE);
+                    exitDialog.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            stageBack();
+                        }
+                    });
+                    editor.putBoolean("firstVisitStore",false);
+                    editor.commit();
+                }
+                else
+                {
+                    stageBack();
+                }
+            }
+        });
+
 
         caller = getIntent();
     }
@@ -65,7 +90,18 @@ public class itemstore extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        stageBack();
+        if(settings.getBoolean("firstVisitStore",true))
+        {
+            LinearLayout exitDialog = (LinearLayout) findViewById(R.id.startDialog);
+            exitDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stageBack();
+                }
+            });
+            editor.putBoolean("firstVisitStore",false);
+            editor.commit();
+        }
     }
 
     private void stageBack()

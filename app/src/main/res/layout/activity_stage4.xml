@@ -34,8 +34,7 @@
         android:id="@+id/startDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#33000000"
+        android:background="#ccffffff"
         android:elevation="1dp"
         android:orientation="vertical"
         android:gravity="center_vertical"
@@ -45,7 +44,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -60,7 +58,7 @@
                 android:id="@+id/textStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="0"
                 android:text="Ha ha ha... Can you defeat me?"
                 android:textSize="30sp" />
@@ -79,11 +77,13 @@
 
     <LinearLayout
         android:id="@+id/gameoverDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ccffffff"
+        android:elevation="1dp"
         android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="20dp"
         android:visibility="gone">
 
         <TextView
@@ -92,8 +92,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="You Win!!!"
-            android:textSize="72sp" />
+            android:gravity="center"
+            android:text="You Win!!"
+            android:textSize="60sp" />
 
         <TextView
             android:layout_width="match_parent"

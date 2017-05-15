@@ -19,7 +19,7 @@ public class EndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end);
         settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
         editor = settings.edit();
-        if(!settings.getBoolean("WIN",true))
+        if(settings.getBoolean("LOSE",false))
         {
             TextView textView20 = (TextView) findViewById(R.id.textView20);
             textView20.setText(getString(R.string.end_lose));

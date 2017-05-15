@@ -48,6 +48,10 @@ public class Stage4Activity extends AppCompatActivity {
         settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
         editor = settings.edit();
 
+        if(settings.getBoolean("WIN",false) || settings.getBoolean("LOSE",false))
+        {
+            stageClear();
+        }
         actionBar = (LinearLayout) findViewById(R.id.actionBar);
         itemBar = (HorizontalScrollView) findViewById(R.id.itemBar);
         itemBarLL = (LinearLayout) findViewById(R.id.itemBarLL);
@@ -334,13 +338,16 @@ public class Stage4Activity extends AppCompatActivity {
                 {
                     switchBar(Bar.MSG);
                     gameoverDialog.setVisibility(View.VISIBLE);
+                    editor.putBoolean("WIN",true);
+                    editor.commit();
                 }
                 else if(state==State.LOSE)
                 {
                     switchBar(Bar.MSG);
                     textGameover.setText("You lose....");
                     gameoverDialog.setVisibility(View.VISIBLE);
-
+                    editor.putBoolean("LOSE",true);
+                    editor.commit();
                 }
             }
         });
@@ -422,7 +429,6 @@ public class Stage4Activity extends AppCompatActivity {
     {
         Intent intent;
         intent = new Intent(Stage4Activity.this,EndActivity.class);
-        editor.putBoolean("WIN",state==State.WIN);
         editor.putInt(getString(R.string.key_fromStage),4);
         editor.commit();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
