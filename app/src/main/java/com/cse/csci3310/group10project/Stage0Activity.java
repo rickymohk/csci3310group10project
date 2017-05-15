@@ -61,6 +61,7 @@ public class Stage0Activity extends AppCompatActivity {
     String uuid2, distance2;
     String uuid3, distance3;
     int rssi1, rssi2, rssi3;
+    int minutes, seconds;
 
     protected static final String TAG = "BeaconsEverywhere";
 
@@ -157,8 +158,8 @@ public class Stage0Activity extends AppCompatActivity {
         IntentFilter intentfilter = new IntentFilter();
         intentfilter.addAction(MyService.beacon);
         registerReceiver(myReceiver, intentfilter);
-        startService();
 
+        startService();
     }
 
     public void startService() {
@@ -172,6 +173,8 @@ public class Stage0Activity extends AppCompatActivity {
     private class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            seconds = intent.getIntExtra("seconds", 0);
+            minutes = intent.getIntExtra("minutes", 0);
             uuid1 = intent.getStringExtra("uuid1");
             distance1 = intent.getStringExtra("distance1");
             rssi1 = intent.getIntExtra("rssi1", 0);
@@ -191,13 +194,15 @@ public class Stage0Activity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                TextView time = (TextView) findViewById(R.id.time);
                                 TextView textBeacon1 = (TextView) findViewById(R.id.beacon1);
                                 TextView textBeacon2 = (TextView) findViewById(R.id.beacon2);
                                 TextView textBeacon3 = (TextView) findViewById(R.id.beacon3);
+                                time.setText("Time: " + minutes + ":" + seconds );
                                 textBeacon1.setText("58 - UUID: " + uuid1 + ", Distance: " + distance1 + ", RSSI: " + rssi1);
                                 textBeacon2.setText("CC - UUID: " + uuid2 + ", Distance: " + distance2 + ", RSSI: " + rssi2);
                                 textBeacon3.setText("iPad(E8) - UUID: " + uuid3 + ", Distance: " + distance3 + ", RSSI: " + rssi3);
