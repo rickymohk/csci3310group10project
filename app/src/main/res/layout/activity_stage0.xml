@@ -26,7 +26,7 @@
         android:id="@+id/imgPOI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:srcCompat="@drawable/mappois" />
 
     <ImageView
@@ -64,19 +64,19 @@
         android:visibility="invisible"
         app:srcCompat="@drawable/point1s" />
 
-            <ImageView
-                android:id="@+id/point2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/point2s" />
+    <ImageView
+        android:id="@+id/point2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point2s" />
 
-            <ImageView
-                android:id="@+id/point3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/point3s" />
+    <ImageView
+        android:id="@+id/point3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point3s" />
 
             <ImageView
                 android:id="@+id/point4"
