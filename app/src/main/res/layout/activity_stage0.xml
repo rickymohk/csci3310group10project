@@ -11,7 +11,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/btnFound"
@@ -23,45 +23,75 @@
                 android:visibility="gone" />
 
             <ImageView
-                android:id="@+id/imgMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/shb_09" />
-
-            <ImageView
                 android:id="@+id/imgPOI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:srcCompat="@drawable/mappois" />
+
+            <ImageView
+
+                android:id="@+id/imgMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/shb_09s" />
+
+
+            <ImageView
+                android:id="@+id/nearPoint1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/mappoi" />
+                app:srcCompat="@drawable/near_point1s" />
+
+            <ImageView
+                android:id="@+id/nearPoint2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/near_point2s" />
+
+            <ImageView
+                android:id="@+id/nearPoint3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/near_point3s" />
+
+            <ImageView
+                android:id="@+id/nearPoint4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/near_point4s" />
 
             <ImageView
                 android:id="@+id/point1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/point1" />
+                app:srcCompat="@drawable/point1s" />
 
             <ImageView
                 android:id="@+id/point2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/point2" />
+                app:srcCompat="@drawable/point2s" />
 
             <ImageView
                 android:id="@+id/point3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/point3" />
+                app:srcCompat="@drawable/point3s" />
 
             <ImageView
                 android:id="@+id/point4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/point4" />
+                app:srcCompat="@drawable/point4s" />
 
             <Spinner
                 android:id="@+id/beaconCheater"
@@ -71,49 +101,46 @@
                 android:layout_toEndOf="@+id/btnFound"
                 android:spinnerMode="dialog" />
 
-            <TextView
-                android:id="@+id/time"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Time"
-                android:layout_above="@+id/beacon1"
-                android:layout_toEndOf="@+id/btnFound" />
-
-            <TextView
-                android:id="@+id/beacon1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Becaon1"
-                android:layout_above="@+id/beacon2"
-                android:layout_toEndOf="@+id/btnFound" />
-
-            <TextView
-                android:id="@+id/beacon2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Beacon2"
-                android:layout_above="@+id/beacon3"
-                android:layout_toEndOf="@+id/btnFound" />
-
-            <TextView
-                android:id="@+id/beacon3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Beacon3"
-                android:layout_above="@+id/beacon4"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:id="@+id/beacon4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Beacon4"
+                android:orientation="vertical"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true" />
+                android:layout_toEndOf="@+id/btnFound">
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/beacon1"
+                    android:text="Time" />
+
+                <TextView
+                    android:id="@+id/beacon1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Becaon1" />
+
+                <TextView
+                    android:id="@+id/beacon2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Beacon2" />
+
+                <TextView
+                    android:id="@+id/beacon3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Beacon3" />
+
+                <TextView
+                    android:id="@+id/beacon4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Beacon4" />
+            </LinearLayout>
 
         </RelativeLayout>
-
     </LinearLayout>
-
 
 </RelativeLayout>
