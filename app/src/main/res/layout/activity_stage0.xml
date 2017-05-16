@@ -14,14 +14,7 @@
                 android:text="Found"
                 android:visibility="gone" />
 
-            <ImageView
-                android:id="@+id/imgPOI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:srcCompat="@drawable/mappois" />
-
-            <ImageView
+    <ImageView
 
                 android:id="@+id/imgMap"
                 android:layout_width="wrap_content"
@@ -29,7 +22,14 @@
                 app:srcCompat="@drawable/shb_09s" />
 
 
-            <ImageView
+    <ImageView
+        android:id="@+id/imgPOI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:srcCompat="@drawable/mappois" />
+
+    <ImageView
                 android:id="@+id/nearPoint1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -38,7 +38,7 @@ public class Stage0Activity extends AppCompatActivity {
     Button btnFound;
     int currentStage = 0;
     Intent caller;
-    ImageView map, poi, nearPoint1, nearPoint2, nearPoint3, nearPoint4, point1, point2, point3, point4;
+    ImageView map, cheatPoint, nearPoint1, nearPoint2, nearPoint3, nearPoint4, point1, point2, point3, point4;
     boolean[] nearBeacon;
     Spinner beaconCheater;
 
@@ -66,6 +66,9 @@ public class Stage0Activity extends AppCompatActivity {
 
         map = (ImageView) findViewById(R.id.imgMap);
 
+        cheatPoint = (ImageView) findViewById(R.id.imgPOI);
+        pointToStage(cheatPoint);
+
         nearBeacon = new boolean[] {false,false,false,false};
         point1 = (ImageView) findViewById(R.id.point1);
         point2 = (ImageView) findViewById(R.id.point2);
@@ -75,7 +78,7 @@ public class Stage0Activity extends AppCompatActivity {
         pointToStage(point2);
         pointToStage(point3);
         pointToStage(point4);
-/*
+
         //================To be replaced by beacon logic================================//
         beaconCheater = (Spinner) findViewById(R.id.beaconCheater);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.beacons_array,android.R.layout.simple_spinner_dropdown_item);
@@ -97,7 +100,7 @@ public class Stage0Activity extends AppCompatActivity {
         });
         //=======================================================================//
 
-*/
+
 
 
         btnFound = (Button) findViewById(R.id.btnFound);
@@ -117,8 +120,6 @@ public class Stage0Activity extends AppCompatActivity {
         registerReceiver(myReceiver, intentfilter);
 
         startService();
-
-  //      pointChecker();
     }
 
     public void startService() {
@@ -216,7 +217,7 @@ public class Stage0Activity extends AppCompatActivity {
                                 textBeacon2.setText("CC - UUID: " + uuid2 + ", Distance: " + distance2 + ", RSSI: " + rssi2);
                                 textBeacon3.setText("iPad(E8) - UUID: " + uuid3 + ", Distance: " + distance3 + ", RSSI: " + rssi3);
                                 textBeacon4.setText("Mobile - UUID: " + uuid4 + ", Distance: " + distance4 + ", RSSI: " + rssi4);
-
+/*
                                 if(distance1 < 2.0 && distance1 >= 1.0 && currentStage == 0) {
                                     nearPoint1.setVisibility(View.VISIBLE);
                                 }
@@ -280,7 +281,7 @@ public class Stage0Activity extends AppCompatActivity {
                                     nearBeacon[3] = false;
                                     point4.setVisibility(View.INVISIBLE);
                                 }
-
+*/
                             }
                         });
                     }
