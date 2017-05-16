@@ -68,7 +68,13 @@ public class Stage0Activity extends AppCompatActivity {
 
         nearBeacon = new boolean[] {false,false,false,false};
         point1 = (ImageView) findViewById(R.id.point1);
+        point2 = (ImageView) findViewById(R.id.point2);
+        point3 = (ImageView) findViewById(R.id.point3);
+        point4 = (ImageView) findViewById(R.id.point4);
         pointToStage(point1);
+        pointToStage(point2);
+        pointToStage(point3);
+        pointToStage(point4);
 /*
         //================To be replaced by beacon logic================================//
         beaconCheater = (Spinner) findViewById(R.id.beaconCheater);
@@ -193,6 +199,7 @@ public class Stage0Activity extends AppCompatActivity {
         point2 = (ImageView) findViewById(R.id.point2);
         point3 = (ImageView) findViewById(R.id.point3);
         point4 = (ImageView) findViewById(R.id.point4);
+
         Thread t = new Thread() {
 
             @Override
@@ -204,54 +211,74 @@ public class Stage0Activity extends AppCompatActivity {
                             @Override
                             public void run() {
 
-
-                                time.setText("Time: " + minutes + ":" + seconds );
+                                time.setText("Time: " + minutes + ":" + seconds + ", Current Stage: " + currentStage);
                                 textBeacon1.setText("58 - UUID: " + uuid1 + ", Distance: " + distance1 + ", RSSI: " + rssi1);
                                 textBeacon2.setText("CC - UUID: " + uuid2 + ", Distance: " + distance2 + ", RSSI: " + rssi2);
                                 textBeacon3.setText("iPad(E8) - UUID: " + uuid3 + ", Distance: " + distance3 + ", RSSI: " + rssi3);
                                 textBeacon4.setText("Mobile - UUID: " + uuid4 + ", Distance: " + distance4 + ", RSSI: " + rssi4);
 
-                                if((distance1 > 2.0 && distance1 >= 1.0) && currentStage == 0) {
-                                    nearPoint1.setVisibility(View.INVISIBLE);
-                                }
-                                else {
+                                if(distance1 < 2.0 && distance1 >= 1.0 && currentStage == 0) {
                                     nearPoint1.setVisibility(View.VISIBLE);
                                 }
-
-                                if(distance1 > 1.0 && currentStage == 0) {
-                                    nearBeacon[0] = false;
-                                    point1.setVisibility(View.INVISIBLE);
-                                }
                                 else {
+                                    nearPoint1.setVisibility(View.INVISIBLE);
+                                }
+
+                                if((distance1 < 1.0 && distance1 >= 0.0 && currentStage == 0) || currentStage > 0) {
                                     nearBeacon[0] = true;
                                     point1.setVisibility(View.VISIBLE);
                                 }
+                                else {
+                                    nearBeacon[0] = false;
+                                    point1.setVisibility(View.INVISIBLE);
+                                }
 
-                                if((distance2 > 1.0 && currentStage == 1) || currentStage < 1) {
+                                if(distance2 < 2.0 && distance2 >= 1.0 && currentStage == 1) {
+                                    nearPoint2.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    nearPoint2.setVisibility(View.INVISIBLE);
+                                }
+
+                                if((distance2 < 1.0 && distance2 >= 0.0 && currentStage == 1) || currentStage > 1) {
+                                    nearBeacon[1] = true;
+                                    point2.setVisibility(View.VISIBLE);
+                                }
+                                else {
                                     nearBeacon[1] = false;
                                     point2.setVisibility(View.INVISIBLE);
                                 }
+
+                                if(distance3 < 2.0 && distance3 >= 1.0 && currentStage == 2) {
+                                    nearPoint3.setVisibility(View.VISIBLE);
+                                }
                                 else {
-                                    nearBeacon[1] = true;
-                                    point1.setVisibility(View.VISIBLE);
+                                    nearPoint3.setVisibility(View.INVISIBLE);
                                 }
 
-                                if((distance3 > 1.0 && currentStage == 2) || currentStage < 2) {
+                                if((distance3 < 1.0 && distance3 >= 0.0 && currentStage == 2) || currentStage > 2) {
+                                    nearBeacon[2] = true;
+                                    point3.setVisibility(View.VISIBLE);
+                                }
+                                else {
                                     nearBeacon[2] = false;
                                     point3.setVisibility(View.INVISIBLE);
                                 }
+
+                                if(distance4 < 2.0 && distance4 >= 1.0 && currentStage == 3) {
+                                    nearPoint4.setVisibility(View.VISIBLE);
+                                }
                                 else {
-                                    nearBeacon[2] = true;
-                                    point1.setVisibility(View.VISIBLE);
+                                    nearPoint4.setVisibility(View.INVISIBLE);
                                 }
 
-                                if((distance4 > 1.0 && currentStage == 3) || currentStage < 3) {
-                                    nearBeacon[3] = false;
-                                    point4.setVisibility(View.INVISIBLE);
-                                }
-                                else {
+                                if((distance4 < 1.0 && distance4 >= 0.0 && currentStage == 3) || currentStage > 3) {
                                     nearBeacon[3] = true;
                                     point4.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    nearBeacon[3] = false;
+                                    point4.setVisibility(View.INVISIBLE);
                                 }
 
                             }
@@ -262,56 +289,6 @@ public class Stage0Activity extends AppCompatActivity {
             }
         };
 
-        t.start();
-    }
-
-    public void pointChecker() {
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-
-                try {
-                    while (!isInterrupted()) {
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                nearPoint1 = (ImageView) findViewById(R.id.nearPoint1);
-                                nearPoint2 = (ImageView) findViewById(R.id.nearPoint2);
-                                nearPoint3 = (ImageView) findViewById(R.id.nearPoint3);
-                                nearPoint4 = (ImageView) findViewById(R.id.nearPoint4);
-                                point1 = (ImageView) findViewById(R.id.point1);
-                                point2 = (ImageView) findViewById(R.id.point2);
-                                point3 = (ImageView) findViewById(R.id.point3);
-                                point4 = (ImageView) findViewById(R.id.point4);
-
-                                if(rssi1 > -75 && rssi1 < -1 && currentStage == 0) {
-                                    nearBeacon[0] = true;
-                                    point1.setVisibility(View.VISIBLE);
-                                }
-
-                                if(rssi2 > -50 && rssi2< -1 && currentStage >= 0) {
-                                    nearBeacon[1] = true;
-                                    point2.setVisibility(View.VISIBLE);
-                                }
-
-                                if(rssi3 > -50 && rssi3< -1 && currentStage >= 1) {
-                                    nearBeacon[2] = true;
-                                    point3.setVisibility(View.VISIBLE);
-                                }
-
-                                if(rssi4 > -50 && rssi4< -1 && currentStage >= 2) {
-                                    nearBeacon[3] = true;
-                                    point4.setVisibility(View.VISIBLE);
-                                }
-
-                            }
-                        });
-                    }
-                } catch (Exception e) {
-                }
-            }
-        };
         t.start();
     }
 

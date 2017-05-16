@@ -4,14 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/btnFound"
@@ -65,12 +57,12 @@
                 android:visibility="invisible"
                 app:srcCompat="@drawable/near_point4s" />
 
-            <ImageView
-                android:id="@+id/point1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/point1s" />
+    <ImageView
+        android:id="@+id/point1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point1s" />
 
             <ImageView
                 android:id="@+id/point2"
@@ -139,8 +131,5 @@
                     android:layout_height="wrap_content"
                     android:text="Beacon4" />
             </LinearLayout>
-
-        </RelativeLayout>
-    </LinearLayout>
 
 </RelativeLayout>
