@@ -29,19 +29,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.altbeacon.beacon.Beacon;
-import org.altbeacon.beacon.BeaconConsumer;
-import org.altbeacon.beacon.BeaconManager;
-import org.altbeacon.beacon.BeaconParser;
-import org.altbeacon.beacon.Identifier;
-import org.altbeacon.beacon.MonitorNotifier;
-import org.altbeacon.beacon.RangeNotifier;
-import org.altbeacon.beacon.Region;
-import org.altbeacon.beacon.startup.BootstrapNotifier;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class Stage0Activity extends AppCompatActivity {
 
@@ -52,15 +39,13 @@ public class Stage0Activity extends AppCompatActivity {
     int currentStage = 0;
     Intent caller;
     ImageView map, poi, nearPoint1, nearPoint2, nearPoint3, nearPoint4, point1, point2, point3, point4;
-    boolean[] nearBeacon = new boolean[] {false,false,false,false};;
+    boolean[] nearBeacon;
     Spinner beaconCheater;
 
     MyReceiver myReceiver;
 
-    String uuid1, distance1;
-    String uuid2, distance2;
-    String uuid3, distance3;
-    String uuid4, distance4;
+    String uuid1, uuid2, uuid3, uuid4;
+    double distance1, distance2, distance3, distance4;
     int rssi1, rssi2, rssi3, rssi4;
     int minutes, seconds;
 
@@ -69,13 +54,7 @@ public class Stage0Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage0);
 
-        displayBeaconInfo();
-        myReceiver = new MyReceiver();
-        IntentFilter intentfilter = new IntentFilter();
-        intentfilter.addAction(MyService.beacon);
-        registerReceiver(myReceiver, intentfilter);
 
-        startService();
 
         settings = getSharedPreferences(getString(R.string.preference_file_key), 0);
         editor = settings.edit();
@@ -87,12 +66,9 @@ public class Stage0Activity extends AppCompatActivity {
 
         map = (ImageView) findViewById(R.id.imgMap);
 
-        poi = (ImageView) findViewById(R.id.imgPOI);
-
-        pointChecker();
-
-    //    nearBeacon = new boolean[] {false,false,false,false};
-
+        nearBeacon = new boolean[] {false,false,false,false};
+        point1 = (ImageView) findViewById(R.id.point1);
+        pointToStage(point1);
 /*
         //================To be replaced by beacon logic================================//
         beaconCheater = (Spinner) findViewById(R.id.beaconCheater);
@@ -116,10 +92,61 @@ public class Stage0Activity extends AppCompatActivity {
         //=======================================================================//
 
 */
+
+
+        btnFound = (Button) findViewById(R.id.btnFound);
+        btnFound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int nextStage = currentStage +1;
+                if(nextStage<5)
+                    goToStage(nextStage);
+            }
+        });
+
+        displayBeaconInfo();
+        myReceiver = new MyReceiver();
+        IntentFilter intentfilter = new IntentFilter();
+        intentfilter.addAction(MyService.beacon);
+        registerReceiver(myReceiver, intentfilter);
+
+        startService();
+
+  //      pointChecker();
+    }
+
+    public void startService() {
+        startService(new Intent(getBaseContext(), MyService.class));
+    }
+
+    public void stopService() {
+        stopService(new Intent(getBaseContext(), MyService.class));
+    }
+
+    private class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            seconds = intent.getIntExtra("seconds", 0);
+            minutes = intent.getIntExtra("minutes", 0);
+            uuid1 = intent.getStringExtra("uuid1");
+            distance1 = intent.getDoubleExtra("distance1", 0);
+            rssi1 = intent.getIntExtra("rssi1", 0);
+            uuid2 = intent.getStringExtra("uuid2");
+            distance2 = intent.getDoubleExtra("distance2", 0);
+            rssi2 = intent.getIntExtra("rssi2", 0);
+            uuid3 = intent.getStringExtra("uuid3");
+            distance3 = intent.getDoubleExtra("distance3", 0);
+            rssi3 = intent.getIntExtra("rssi3", 0);
+            uuid4 = intent.getStringExtra("uuid4");
+            distance4 = intent.getDoubleExtra("distance4", 0);
+            rssi4 = intent.getIntExtra("rssi4", 0);
+        }
+    }
+
+    public void pointToStage(final View poi) {
         poi.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
                 int x = (int)event.getX();
                 int y = (int)event.getY();
                 poi.setDrawingCacheEnabled(true);
@@ -150,50 +177,22 @@ public class Stage0Activity extends AppCompatActivity {
                 return true;
             }
         });
-
-
-        btnFound = (Button) findViewById(R.id.btnFound);
-        btnFound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int nextStage = currentStage +1;
-                if(nextStage<5)
-                    goToStage(nextStage);
-            }
-        });
-
-
-    }
-
-    public void startService() {
-        startService(new Intent(getBaseContext(), MyService.class));
-    }
-
-    public void stopService() {
-        stopService(new Intent(getBaseContext(), MyService.class));
-    }
-
-    private class MyReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            seconds = intent.getIntExtra("seconds", 0);
-            minutes = intent.getIntExtra("minutes", 0);
-            uuid1 = intent.getStringExtra("uuid1");
-            distance1 = intent.getStringExtra("distance1");
-            rssi1 = intent.getIntExtra("rssi1", 0);
-            uuid2 = intent.getStringExtra("uuid2");
-            distance2 = intent.getStringExtra("distance2");
-            rssi2 = intent.getIntExtra("rssi2", 0);
-            uuid3 = intent.getStringExtra("uuid3");
-            distance3 = intent.getStringExtra("distance3");
-            rssi3 = intent.getIntExtra("rssi3", 0);
-            uuid4 = intent.getStringExtra("uuid4");
-            distance4 = intent.getStringExtra("distance4");
-            rssi4 = intent.getIntExtra("rssi4", 0);
-        }
     }
 
     public void displayBeaconInfo() {
+        final TextView time = (TextView) findViewById(R.id.time);
+        final TextView textBeacon1 = (TextView) findViewById(R.id.beacon1);
+        final TextView textBeacon2 = (TextView) findViewById(R.id.beacon2);
+        final TextView textBeacon3 = (TextView) findViewById(R.id.beacon3);
+        final TextView textBeacon4 = (TextView) findViewById(R.id.beacon4);
+        nearPoint1 = (ImageView) findViewById(R.id.nearPoint1);
+        nearPoint2 = (ImageView) findViewById(R.id.nearPoint2);
+        nearPoint3 = (ImageView) findViewById(R.id.nearPoint3);
+        nearPoint4 = (ImageView) findViewById(R.id.nearPoint4);
+        point1 = (ImageView) findViewById(R.id.point1);
+        point2 = (ImageView) findViewById(R.id.point2);
+        point3 = (ImageView) findViewById(R.id.point3);
+        point4 = (ImageView) findViewById(R.id.point4);
         Thread t = new Thread() {
 
             @Override
@@ -204,16 +203,56 @@ public class Stage0Activity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                TextView time = (TextView) findViewById(R.id.time);
-                                TextView textBeacon1 = (TextView) findViewById(R.id.beacon1);
-                                TextView textBeacon2 = (TextView) findViewById(R.id.beacon2);
-                                TextView textBeacon3 = (TextView) findViewById(R.id.beacon3);
-                                TextView textBeacon4 = (TextView) findViewById(R.id.beacon4);
+
+
                                 time.setText("Time: " + minutes + ":" + seconds );
                                 textBeacon1.setText("58 - UUID: " + uuid1 + ", Distance: " + distance1 + ", RSSI: " + rssi1);
                                 textBeacon2.setText("CC - UUID: " + uuid2 + ", Distance: " + distance2 + ", RSSI: " + rssi2);
                                 textBeacon3.setText("iPad(E8) - UUID: " + uuid3 + ", Distance: " + distance3 + ", RSSI: " + rssi3);
                                 textBeacon4.setText("Mobile - UUID: " + uuid4 + ", Distance: " + distance4 + ", RSSI: " + rssi4);
+
+                                if((distance1 > 2.0 && distance1 >= 1.0) && currentStage == 0) {
+                                    nearPoint1.setVisibility(View.INVISIBLE);
+                                }
+                                else {
+                                    nearPoint1.setVisibility(View.VISIBLE);
+                                }
+
+                                if(distance1 > 1.0 && currentStage == 0) {
+                                    nearBeacon[0] = false;
+                                    point1.setVisibility(View.INVISIBLE);
+                                }
+                                else {
+                                    nearBeacon[0] = true;
+                                    point1.setVisibility(View.VISIBLE);
+                                }
+
+                                if((distance2 > 1.0 && currentStage == 1) || currentStage < 1) {
+                                    nearBeacon[1] = false;
+                                    point2.setVisibility(View.INVISIBLE);
+                                }
+                                else {
+                                    nearBeacon[1] = true;
+                                    point1.setVisibility(View.VISIBLE);
+                                }
+
+                                if((distance3 > 1.0 && currentStage == 2) || currentStage < 2) {
+                                    nearBeacon[2] = false;
+                                    point3.setVisibility(View.INVISIBLE);
+                                }
+                                else {
+                                    nearBeacon[2] = true;
+                                    point1.setVisibility(View.VISIBLE);
+                                }
+
+                                if((distance4 > 1.0 && currentStage == 3) || currentStage < 3) {
+                                    nearBeacon[3] = false;
+                                    point4.setVisibility(View.INVISIBLE);
+                                }
+                                else {
+                                    nearBeacon[3] = true;
+                                    point4.setVisibility(View.VISIBLE);
+                                }
 
                             }
                         });
@@ -246,7 +285,7 @@ public class Stage0Activity extends AppCompatActivity {
                                 point3 = (ImageView) findViewById(R.id.point3);
                                 point4 = (ImageView) findViewById(R.id.point4);
 
-                                if(rssi1 > -50 && rssi1< -1) {
+                                if(rssi1 > -75 && rssi1 < -1 && currentStage == 0) {
                                     nearBeacon[0] = true;
                                     point1.setVisibility(View.VISIBLE);
                                 }
