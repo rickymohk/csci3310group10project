@@ -282,15 +282,22 @@ public class Stage4Activity extends AppCompatActivity {
                     case Item.POISON:
                         writeMsg("You use poison.");
                         battleWait(1000);
-                        writeMsg(theBoss.name + " get poisoned");
-                        theBoss.debuf = 1;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TextView bossDebufText = (TextView) findViewById(R.id.bossDebuff);
-                                bossDebufText.setVisibility(View.VISIBLE);
-                            }
-                        });
+                        if(theBoss.debuf==0)
+                        {
+                            writeMsg(theBoss.name + " get poisoned");
+                            theBoss.debuf = 1;
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    TextView bossDebufText = (TextView) findViewById(R.id.bossDebuff);
+                                    bossDebufText.setVisibility(View.VISIBLE);
+                                }
+                            });
+                        }
+                        else if(theBoss.debuf==1)
+                        {
+                            writeMsg(theBoss.name + " is already poisoned");
+                        }
                         battleWait(1000);
                         break;
                 }
