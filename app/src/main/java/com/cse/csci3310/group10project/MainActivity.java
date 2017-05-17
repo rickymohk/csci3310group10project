@@ -48,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
         editor = settings.edit();
         boolean savedGame = settings.getBoolean("SAVEDGAME",false);
 
+        Button btnToStage3 = (Button) findViewById(R.id.btnToStage3);
+        btnToStage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this,Stage3Activity.class);
+                intent.putExtra("stage",-1);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnLoad = (Button) findViewById(R.id.btnLoad);
         btnLoad.setEnabled(savedGame);

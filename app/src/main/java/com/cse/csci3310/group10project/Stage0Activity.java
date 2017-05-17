@@ -36,6 +36,8 @@ public class Stage0Activity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     SharedPreferences settings;
 
+    final boolean cheat = true;
+
     Button btnFound;
     int currentStage = 0;
     Intent caller;
@@ -78,10 +80,11 @@ public class Stage0Activity extends AppCompatActivity {
         pointToStage(point3);
         pointToStage(point4);
         */
-/*
+
+  /*
         //================To be replaced by beacon logic================================//
         cheatPoint = (ImageView) findViewById(R.id.imgPOI);
-        pointToStage(cheatPoint);
+        //pointToStage(cheatPoint);
         beaconCheater = (Spinner) findViewById(R.id.beaconCheater);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.beacons_array,android.R.layout.simple_spinner_dropdown_item);
         beaconCheater.setAdapter(adapter);
@@ -99,7 +102,9 @@ public class Stage0Activity extends AppCompatActivity {
             }
         });
         //=======================================================================//
-*/
+    */
+
+
 
 
         btnFound = (Button) findViewById(R.id.btnFound);

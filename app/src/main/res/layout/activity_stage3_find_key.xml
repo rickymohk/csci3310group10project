@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:srcCompat="@drawable/findkey" />
+        app:srcCompat="@drawable/findkey2" />
 
     <ImageView
         android:id="@+id/yellowCircle"
@@ -41,9 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="After touching the four differences on the posters, a secret door is opened.
-            This is a kitchen.You remember that there is still an unexplored locked door in this floor.Maybe you
-            can find a key in this kitchen for that door.\n"
+            android:text="@string/find_key_hint_1"
             android:textAlignment="center"
             android:textSize="20sp" />
 
@@ -77,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Congratulations.You just found a key.Maybe it can be used to open the unexplored door.\n"
+            android:text="@string/find_key_hint_2"
             android:textAlignment="center"
             android:textSize="20sp" />
 

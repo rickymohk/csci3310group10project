@@ -50,7 +50,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Stage3FindKeyActivity"></activity>
+        <activity android:name=".Stage3FindKeyActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
