@@ -50,31 +50,34 @@
         android:id="@+id/exitDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:padding="10dp"
-        android:orientation="vertical"
         android:background="#ccffffff"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
         android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Shopkeeper:\n"
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
+            android:textSize="20sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="@string/itemstore_hint"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textSize="18sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\n--Tab to continue--"
             android:layout_gravity="center"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="\n--Tab to continue--"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

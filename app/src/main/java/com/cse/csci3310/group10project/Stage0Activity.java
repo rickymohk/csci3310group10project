@@ -224,7 +224,6 @@ public class Stage0Activity extends AppCompatActivity {
                                 else {
                                     nearPoint1.setVisibility(View.INVISIBLE);
                                 }
-
                                 if((distance1 < 1.0 && distance1 >= 0.0 && currentStage == 0) || currentStage > 0) {
                                     nearBeacon[0] = true;
                                     point1.setVisibility(View.VISIBLE);
@@ -233,14 +232,12 @@ public class Stage0Activity extends AppCompatActivity {
                                     nearBeacon[0] = false;
                                     point1.setVisibility(View.INVISIBLE);
                                 }
-
                                 if(distance2 < 2.0 && distance2 >= 1.0 && currentStage == 1) {
                                     nearPoint2.setVisibility(View.VISIBLE);
                                 }
                                 else {
                                     nearPoint2.setVisibility(View.INVISIBLE);
                                 }
-
                                 if((distance2 < 1.0 && distance2 >= 0.0 && currentStage == 1) || currentStage > 1) {
                                     nearBeacon[1] = true;
                                     point2.setVisibility(View.VISIBLE);
@@ -249,14 +246,12 @@ public class Stage0Activity extends AppCompatActivity {
                                     nearBeacon[1] = false;
                                     point2.setVisibility(View.INVISIBLE);
                                 }
-
                                 if(distance3 < 2.0 && distance3 >= 1.0 && currentStage == 2) {
                                     nearPoint3.setVisibility(View.VISIBLE);
                                 }
                                 else {
                                     nearPoint3.setVisibility(View.INVISIBLE);
                                 }
-
                                 if((distance3 < 1.0 && distance3 >= 0.0 && currentStage == 2) || currentStage > 2) {
                                     nearBeacon[2] = true;
                                     point3.setVisibility(View.VISIBLE);
@@ -265,14 +260,12 @@ public class Stage0Activity extends AppCompatActivity {
                                     nearBeacon[2] = false;
                                     point3.setVisibility(View.INVISIBLE);
                                 }
-
                                 if(distance4 < 2.0 && distance4 >= 1.0 && currentStage == 3) {
                                     nearPoint4.setVisibility(View.VISIBLE);
                                 }
                                 else {
                                     nearPoint4.setVisibility(View.INVISIBLE);
                                 }
-
                                 if((distance4 < 1.0 && distance4 >= 0.0 && currentStage == 3) || currentStage > 3) {
                                     nearBeacon[3] = true;
                                     point4.setVisibility(View.VISIBLE);

@@ -1,9 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cse.csci3310.group10project.Stage3FindKeyActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/findkeymask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:srcCompat="@drawable/blue1" />
+
+    <ImageView
+        android:id="@+id/findkeyimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:srcCompat="@drawable/findkey" />
+
+    <ImageView
+        android:id="@+id/yellowCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/yellowcircle" />
+
+    <LinearLayout
+        android:id="@+id/Message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="After touching the four differences on the posters, a secret door is opened.
+            This is a kitchen.You remember that there is still an unexplored locked door in this floor.Maybe you
+            can find a key in this kitchen for that door.\n"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="\n--Tab to continue--"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Message1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="98dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/key" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Congratulations.You just found a key.Maybe it can be used to open the unexplored door.\n"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="\n--Tab to continue--"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

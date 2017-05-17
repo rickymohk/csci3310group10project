@@ -25,4 +25,6 @@
 
     <string name="end_win">Congratulations!! \nYou clear the game.</string>
     <string name="end_lose">You lose.\nThe world has ended.</string>
+    <string name="title_activity_stage3_findkey">Stage3FindkeyActivity</string>
+    <string name="title_activity_stage3_find_key">Stage3FindKeyActivity</string>
 </resources>

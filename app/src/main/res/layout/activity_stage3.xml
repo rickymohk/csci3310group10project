@@ -3,17 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnStage3Clear"
+    <ImageView
+        android:id="@+id/FindDiffMask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stage 3 Clear"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:visibility="visible"
+        app:srcCompat="@drawable/finddiffmask" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/FindDiff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/stage_3_dummy" />
+        app:srcCompat="@drawable/finddiff" />
+
+    <ImageView
+        android:id="@+id/GreenCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/green" />
+
+    <ImageView
+        android:id="@+id/BlueCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/blue" />
+
+    <ImageView
+        android:id="@+id/RedCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/BlackCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/black" />
+
+    <LinearLayout
+        android:id="@+id/stage3startpage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="You just walked in an empty room and found a poster on the wall.\n"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="\n--Tab to continue--"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+
+
 </RelativeLayout>

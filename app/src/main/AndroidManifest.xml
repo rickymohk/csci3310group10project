@@ -15,29 +15,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Stage1Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".Stage3Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".Stage4Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".EndActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".Stage0Activity" android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".Stage1Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Stage3Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Stage4Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EndActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Stage0Activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".itemstore"
             android:label="@string/title_activity_itemstore"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <activity android:name=".Stage3FindKeyActivity"></activity>
     </application>
 
 </manifest>
