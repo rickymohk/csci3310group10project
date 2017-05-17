@@ -16,6 +16,7 @@ import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
+import org.altbeacon.beacon.service.ArmaRssiFilter;
 
 import java.util.Calendar;
 import java.util.Collection;
@@ -40,7 +41,7 @@ public class MyService extends Service implements BeaconConsumer {
 
         beaconManager = BeaconManager.getInstanceForApplication(this);
         broadcastThread BroadcastThread = new broadcastThread();
-
+        beaconManager.setRssiFilterImplClass(ArmaRssiFilter.class);
         beaconManager.getBeaconParsers().add(new BeaconParser()
                 .setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
 
@@ -185,7 +186,6 @@ public class MyService extends Service implements BeaconConsumer {
     public void onDestroy() {
         super.onDestroy();
         beaconManager.unbind(this);
-        Toast.makeText(this, "Stop beacon search.", Toast.LENGTH_LONG).show();
         stopSelf();
     }
 

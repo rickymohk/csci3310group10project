@@ -15,40 +15,41 @@
                 android:visibility="gone" />
 
     <ImageView
-
-                android:id="@+id/imgMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/shb_09s" />
-
-
-    <ImageView
         android:id="@+id/imgPOI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:srcCompat="@drawable/mappois" />
 
     <ImageView
-                android:id="@+id/nearPoint1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/near_point1s" />
 
-            <ImageView
-                android:id="@+id/nearPoint2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/near_point2s" />
+        android:id="@+id/imgMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:srcCompat="@drawable/shb_09s" />
 
-            <ImageView
-                android:id="@+id/nearPoint3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/near_point3s" />
+
+    <ImageView
+        android:id="@+id/nearPoint1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/near_point1s" />
+
+    <ImageView
+        android:id="@+id/nearPoint2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/near_point2s" />
+
+    <ImageView
+        android:id="@+id/nearPoint3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/near_point3s" />
 
             <ImageView
                 android:id="@+id/nearPoint4"
@@ -78,14 +79,42 @@
         android:visibility="invisible"
         app:srcCompat="@drawable/point3s" />
 
-            <ImageView
-                android:id="@+id/point4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/point4s" />
+    <ImageView
+        android:id="@+id/point4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point4s" />
 
-            <Spinner
+    <ImageView
+        android:id="@+id/point1l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point1l" />
+
+    <ImageView
+        android:id="@+id/point2l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point2l" />
+
+    <ImageView
+        android:id="@+id/point3l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point3l" />
+
+    <ImageView
+        android:id="@+id/point4l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/point4l" />
+
+    <Spinner
                 android:id="@+id/beaconCheater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
