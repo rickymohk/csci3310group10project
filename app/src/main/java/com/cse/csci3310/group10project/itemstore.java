@@ -102,6 +102,10 @@ public class itemstore extends AppCompatActivity {
             editor.putBoolean("firstVisitStore",false);
             editor.commit();
         }
+        else
+        {
+            stageBack();
+        }
     }
 
     private void stageBack()

@@ -13,6 +13,7 @@ import android.os.RemoteException;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.transition.AutoTransition;
 import android.transition.Scene;
 import android.transition.Transition;
@@ -26,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,13 +38,15 @@ public class Stage0Activity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     SharedPreferences settings;
 
-    final boolean cheat = true;
+    boolean cheat = false;
+    boolean debug = true;
 
     Button btnFound;
     int currentStage = 0;
     Intent caller;
     ImageView map;
     boolean[] nearBeacon;
+    boolean[] cheatBeacon;
     Spinner beaconCheater;
 
     MyReceiver myReceiver;
@@ -72,6 +76,7 @@ public class Stage0Activity extends AppCompatActivity {
         ImageView poi = (ImageView) findViewById(R.id.imgPOI);
         pointToStage(poi);
         nearBeacon = new boolean[] {false,false,false,false};
+        cheatBeacon = new boolean[] {false,false,false,false};
    /*
         point1 = (ImageView) findViewById(R.id.point1);
         point2 = (ImageView) findViewById(R.id.point2);
@@ -82,30 +87,38 @@ public class Stage0Activity extends AppCompatActivity {
         pointToStage(point3);
         pointToStage(point4);
         */
+   if(debug)
+   {
+       LinearLayout debugll = (LinearLayout) findViewById(R.id.debugLL);
+       debugll.setVisibility(View.VISIBLE);
+   }
+   if(cheat) {
 
   /*
         //================To be replaced by beacon logic================================//
         cheatPoint = (ImageView) findViewById(R.id.imgPOI);
         //pointToStage(cheatPoint);
-        beaconCheater = (Spinner) findViewById(R.id.beaconCheater);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.beacons_array,android.R.layout.simple_spinner_dropdown_item);
-        beaconCheater.setAdapter(adapter);
-        beaconCheater.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                nearBeacon[0] = nearBeacon[1] = nearBeacon[2] = nearBeacon[3] = false;
-                if(position>0)
-                {
-                    nearBeacon[position-1] = true;
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //=======================================================================//
-    */
+  */
+       beaconCheater = (Spinner) findViewById(R.id.beaconCheater);
+       ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.beacons_array, android.R.layout.simple_spinner_dropdown_item);
+       beaconCheater.setAdapter(adapter);
+       beaconCheater.setVisibility(View.VISIBLE);
+       beaconCheater.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               cheatBeacon[0] = cheatBeacon[1] = cheatBeacon[2] = cheatBeacon[3] = false;
+               if (position > 0) {
+                   cheatBeacon[position - 1] = true;
+               }
+           }
 
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+           }
+       });
+       //=======================================================================//
+
+   }
 
 
 
@@ -166,22 +179,22 @@ public class Stage0Activity extends AppCompatActivity {
                 Bitmap hotspots = Bitmap.createBitmap(poi.getDrawingCache());
                 poi.setDrawingCacheEnabled(false);
                 int touchColor = hotspots.getPixel(x, y);
-                if(touchColor== Color.RED && nearBeacon[0])
+                if(touchColor== Color.RED && (nearBeacon[0]||cheatBeacon[0]))
                 {
                     if(currentStage >= 0)
                         goToStage(1);
                 }
-                else if(touchColor==Color.GREEN && nearBeacon[1])
+                else if(touchColor==Color.GREEN && (nearBeacon[1]||cheatBeacon[1]))
                 {
                     if(currentStage >= 1)
                         goToStage(2);
                 }
-                else if(touchColor==Color.YELLOW && nearBeacon[2])
+                else if(touchColor==Color.YELLOW && (nearBeacon[2]||cheatBeacon[2]))
                 {
                     if(currentStage >= 2)
                         goToStage(3);
                 }
-                else if(touchColor==Color.BLUE && nearBeacon[3])
+                else if(touchColor==Color.BLUE && (nearBeacon[3]||cheatBeacon[3]))
                 {
                     if(currentStage >= 3)
                         goToStage(4);

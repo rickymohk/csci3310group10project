@@ -21,13 +21,13 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="itemstore_hint">You want to defeat the wanted boss? I saw him left some stuff behind at the staircase at the end of the corridor. You may find some clues there. </string>
+    <string name="itemstore_hint">You want to defeat the wanted boss? I saw him left some stuff behind at the staircase next to the lifts. You may find some clues there. </string>
 
     <string name="find_key_hint_1">After touching the four differences on the posters, a secret door is opened.
             This is a kitchen.You remember that there is still an unexplored locked door in this floor.Maybe you
             can find a key in this kitchen for that door.\n"</string>
 
-    <string name="find_key_hint_2">Congratulations.You just found a key.Maybe it can be used to open the unexplored door.\n</string>
+    <string name="find_key_hint_2">Congratulations.You just found a key. Maybe it can be used to open the unexplored door at the end of the corridor.\n</string>
 
     <string name="end_win">Congratulations!! \nYou clear the game.</string>
     <string name="end_lose">You lose.\nThe world has ended.</string>

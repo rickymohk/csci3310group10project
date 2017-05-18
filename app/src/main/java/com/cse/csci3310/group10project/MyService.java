@@ -34,7 +34,7 @@ public class MyService extends Service implements BeaconConsumer {
     final org.altbeacon.beacon.Region region1 = new org.altbeacon.beacon.Region("myBeacon", Identifier.parse("B5B182C7-EAB1-4988-AA99-B5C1517008D9"), null, null);
     final org.altbeacon.beacon.Region region2 = new org.altbeacon.beacon.Region("myBeacon2", Identifier.parse("B5B182C7-EAB1-4988-AA99-B5C1517008D8"), null, null);
     final org.altbeacon.beacon.Region region3 = new org.altbeacon.beacon.Region("myBeacon3", Identifier.parse("DA2BFB06-7CF3-5B40-BE96-8F1EC8891CE8"), null, null);
- //   final org.altbeacon.beacon.Region region4 = new org.altbeacon.beacon.Region("myBeacon3", Identifier.parse("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"), null, null);
+    final org.altbeacon.beacon.Region region4 = new org.altbeacon.beacon.Region("myBeacon4", Identifier.parse("2f234454-cf6d-4a0f-adf2-f4911ba9ffa6"), null, null);
 
     @Override
     public void onCreate() {
@@ -175,7 +175,7 @@ public class MyService extends Service implements BeaconConsumer {
             beaconManager.startMonitoringBeaconsInRegion(region1);
             beaconManager.startMonitoringBeaconsInRegion(region2);
             beaconManager.startMonitoringBeaconsInRegion(region3);
- //           beaconManager.startMonitoringBeaconsInRegion(region4);
+            beaconManager.startMonitoringBeaconsInRegion(region4);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
